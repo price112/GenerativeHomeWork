@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --job-name=SCFormer
+#SBATCH --account=project_2005312
+#SBATCH --nodes=1
+#SBATCH --partition=gpusmall
+#SBATCH --time=36:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=12
+#SBATCH --gres=gpu:a100:1
+module load pytorch
+export OMP_NUM_THREADS=4
+export WANDB_API_KEY=b4c92ebdf24a2a48e38ba7360e6cd3731a803907
+
+srun python train_celebA_fm.py --model DiT-S/4-diff --fp16 --image_size 256
